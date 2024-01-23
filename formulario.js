@@ -1,7 +1,11 @@
+//Sustitución de #form por .formulario porque esta clase es laque recibe estilos en el archivo CSS
 var formulario = document.querySelector(".formulario");
 
 formulario.onsubmit = function(e) {
 
+  /*preventDefault permite que se validen los datos antes de ser enviados, además de evitar que se refresque la página 
+  Originalmente estaba escrito "e.prevent();"
+  */
   e.preventDefault();
   
   var n = formulario.elements[0]
@@ -30,6 +34,14 @@ if (nombre.length > 0
   }
 }
 
+var inputEdad = document.getElementById('age');
+
+// EventListener para colocar el cursor en el input
+inputEdad.addEventListener('focus', function() {
+// Eliminar la clase que pone el input rojo
+inputEdad.classList.remove('error');
+});
+
 
 
 function agregarInvitado(nombre, edad, nacionalidad) {
@@ -53,16 +65,17 @@ if (lista){
 
 
 var elementoLista = document.createElement("div");
+//El correcto uso de classList, es classList.add, tal como se usa más arriba en la respuesta "error"
 elementoLista.classList.add("elemento-lista");
 lista.appendChild(elementoLista);
 
 var spanNombre = document.createElement("span");
 var inputNombre = document.createElement("input");
 var espacio = document.createElement("br");
-spanNombre.textContent = "Nombre: ";
-inputNombre.value = nombre;
-elementoLista.appendChild(spanNombre);
-elementoLista.appendChild(inputNombre);
+// spanNombre.textContent = "Nombre: ";
+// inputNombre.value = nombre;
+// elementoLista.appendChild(spanNombre);
+// elementoLista.appendChild(inputNombre);
 elementoLista.appendChild(espacio);
 
 function crearElemento(descripcion, valor) {
@@ -88,7 +101,7 @@ elementoLista.appendChild(corteLinea);
 elementoLista.appendChild(botonBorrar);
 
  botonBorrar.onclick = function() {
-// // this.parentNode.style.display = 'none';
+// La función se refiere a una instancia comentada. La acción tiene que ser eliminar el elementoLista
 elementoLista.remove();
   }
 }
@@ -98,8 +111,3 @@ elementoLista.remove();
   }
   
 }
-// Después de cargar el documento
-document.addEventListener("DOMContentLoaded", function() {
-  var botonEliminarInicial = document.getElementById("boton-eliminar-inicial");
-  botonEliminarInicial.style.display = "none";
-});
